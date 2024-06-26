@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "c478db61-8a87-4d26-ba9a-f2f26be24d2c",
+		"name": "Pannes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35059631"
+	},
+	"item": [
+		{
+			"name": "Lists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM1NzI1LCJpYXQiOjE3MTgzMzU0MjUsImp0aSI6ImM5NTJhOTIxYjE1NDQ3Zjk5ZTFmMjU4OGMwOTIyOTAzIiwidXNlcl9pZCI6MX0.jLhq5HluIszomHk9WwKs-24eMA80V4lLlg1eWSlmJic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pannes/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pannes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM1NTYxLCJpYXQiOjE3MTgzMzUyNjEsImp0aSI6Ijg2YmY1YTY2MjhjYzRmNGJiMWEwMTNiYzM3MDZlNWZjIiwidXNlcl9pZCI6MX0.7CAdMvD9JtrbMtFon45jrFrofz_CGwha_-6XwLqLsWE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"moto\": 1,\r\n    \"description\": \"Problème de pneu\",\r\n    \"date_signalement\": \"2024-07-10\",\r\n    \"etat\": \"non_corrigee\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pannes/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pannes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM1NzI1LCJpYXQiOjE3MTgzMzU0MjUsImp0aSI6ImM5NTJhOTIxYjE1NDQ3Zjk5ZTFmMjU4OGMwOTIyOTAzIiwidXNlcl9pZCI6MX0.jLhq5HluIszomHk9WwKs-24eMA80V4lLlg1eWSlmJic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"moto\": 1,\r\n    \"description\": \"Problème de frein résolu\",\r\n    \"date_signalement\": \"2023-06-10\",\r\n    \"etat\": \"corrigee\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pannes/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pannes",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM1NzI1LCJpYXQiOjE3MTgzMzU0MjUsImp0aSI6ImM5NTJhOTIxYjE1NDQ3Zjk5ZTFmMjU4OGMwOTIyOTAzIiwidXNlcl9pZCI6MX0.jLhq5HluIszomHk9WwKs-24eMA80V4lLlg1eWSlmJic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pannes/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pannes",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Selection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM1NzI1LCJpYXQiOjE3MTgzMzU0MjUsImp0aSI6ImM5NTJhOTIxYjE1NDQ3Zjk5ZTFmMjU4OGMwOTIyOTAzIiwidXNlcl9pZCI6MX0.jLhq5HluIszomHk9WwKs-24eMA80V4lLlg1eWSlmJic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pannes/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pannes",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

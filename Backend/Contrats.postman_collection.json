@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "eade4d6f-4647-43d0-9bf0-aba407213d81",
+		"name": "Contrats",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35059631"
+	},
+	"item": [
+		{
+			"name": "Lists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM0MTM5LCJpYXQiOjE3MTgzMzM4MzksImp0aSI6ImViMGY5NmEyNzM0MjRlOTdiZmI5MzVjMjY0NzM5ZDJkIiwidXNlcl9pZCI6MX0.pQzeCVA854GquXgLpb7j4JyPRaqKQI8RVhsu0OlXjY4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/contrats/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"contrats",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMzNjg5LCJpYXQiOjE3MTgzMzMzODksImp0aSI6IjdmMDZkNmY4NGRhNjQwM2ViZjNlMzA4MDI3M2Q2MDFiIiwidXNlcl9pZCI6MX0.hUcsy4g3JXvvBIV0zNl4sKVnSqzrYe67rBRSOCq9D1M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"chauffeur\": 2,\r\n    \"moto\": 1,\r\n    \"type_contrat\": \"crédit\",\r\n    \"montant_initial\": \"5000.00\",\r\n    \"montant_journalier\": \"100.00\",\r\n    \"date_debut\": \"2023-06-10\",\r\n    \"date_fin\": \"2024-06-10\",\r\n    \"etat\": \"en_cours\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/contrats/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"contrats",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM0MTM5LCJpYXQiOjE3MTgzMzM4MzksImp0aSI6ImViMGY5NmEyNzM0MjRlOTdiZmI5MzVjMjY0NzM5ZDJkIiwidXNlcl9pZCI6MX0.pQzeCVA854GquXgLpb7j4JyPRaqKQI8RVhsu0OlXjY4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"chauffeur\": 2,\r\n    \"moto\": 1,\r\n    \"type_contrat\": \"embauche\",\r\n    \"montant_initial\": \"6000.00\",\r\n    \"montant_journalier\": \"120.00\",\r\n    \"date_debut\": \"2023-06-10\",\r\n    \"date_fin\": \"2024-06-10\",\r\n    \"etat\": \"en_cours\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/contrats/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"contrats",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM0MTM5LCJpYXQiOjE3MTgzMzM4MzksImp0aSI6ImViMGY5NmEyNzM0MjRlOTdiZmI5MzVjMjY0NzM5ZDJkIiwidXNlcl9pZCI6MX0.pQzeCVA854GquXgLpb7j4JyPRaqKQI8RVhsu0OlXjY4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/contrats/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"contrats",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Selection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM0MTM5LCJpYXQiOjE3MTgzMzM4MzksImp0aSI6ImViMGY5NmEyNzM0MjRlOTdiZmI5MzVjMjY0NzM5ZDJkIiwidXNlcl9pZCI6MX0.pQzeCVA854GquXgLpb7j4JyPRaqKQI8RVhsu0OlXjY4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/contrats/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"contrats",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

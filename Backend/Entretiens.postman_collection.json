@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "6b6b77c8-edfe-46e1-aa22-2e843581d6da",
+		"name": "Entretiens",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35059631"
+	},
+	"item": [
+		{
+			"name": "Lists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM3MTQ5LCJpYXQiOjE3MTgzMzY4NDksImp0aSI6ImQ1ZGUwZmY0MzMwNzQ0OWU4ZDQ5OGNjN2UyM2Y5MGFkIiwidXNlcl9pZCI6MX0.IDDwVukH8J12dU9a_GP-IEDtwPIQ6Sr6XxuPC8wGUn4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/entretiens/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"entretiens",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM2ODMxLCJpYXQiOjE3MTgzMzY1MzEsImp0aSI6ImI3NWZiOGQyMTVlNDQ3ZmRhNTNiNGE0MDkyNGE1YWU3IiwidXNlcl9pZCI6MX0.h97aZWvqSKlv0g3xoejnuMblDSvvT6RT54W95gFMkfQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"moto\": 1,\r\n    \"type_entretien\": \"Révision générale\",\r\n    \"date_entretion\": \"2024-10-10\",\r\n    \"description\": \"Changement des tous les pneus\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/entretiens/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"entretiens",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM2ODMxLCJpYXQiOjE3MTgzMzY1MzEsImp0aSI6ImI3NWZiOGQyMTVlNDQ3ZmRhNTNiNGE0MDkyNGE1YWU3IiwidXNlcl9pZCI6MX0.h97aZWvqSKlv0g3xoejnuMblDSvvT6RT54W95gFMkfQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"moto\": 1,\r\n    \"type_entretien\": \"Révision générale\",\r\n    \"date_entretion\": \"2023-10-12\",\r\n    \"description\": \"Changement des plaquettes de frein et vidange\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/entretiens/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"entretiens",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM2ODMxLCJpYXQiOjE3MTgzMzY1MzEsImp0aSI6ImI3NWZiOGQyMTVlNDQ3ZmRhNTNiNGE0MDkyNGE1YWU3IiwidXNlcl9pZCI6MX0.h97aZWvqSKlv0g3xoejnuMblDSvvT6RT54W95gFMkfQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/entretiens/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"entretiens",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Selection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM3MTQ5LCJpYXQiOjE3MTgzMzY4NDksImp0aSI6ImQ1ZGUwZmY0MzMwNzQ0OWU4ZDQ5OGNjN2UyM2Y5MGFkIiwidXNlcl9pZCI6MX0.IDDwVukH8J12dU9a_GP-IEDtwPIQ6Sr6XxuPC8wGUn4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/entretiens/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"entretiens",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,141 @@
+<app-navbar></app-navbar>
+<div class="container mx-auto p-6 bg-fixed bg-center bg-cover" style="background-image: url('assets/images/3.png');">
+  <div class="flex flex-wrap -mx-3">
+    <!-- Formulaire -->
+    <div class="w-full lg:w-1/3 px-3 mb-6 lg:mb-0">
+      <div class="bg-white bg-opacity-30 p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">{{ editingUser ? 'Modifier' : 'Ajouter' }} un utilisateur</h2>
+        <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <!-- Autres champs du formulaire -->
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Nom d'utilisateur</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" type="text" formControlName="username">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Mot de passe</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" formControlName="password">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="type_utilisateur">Type d'utilisateur</label>
+            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="type_utilisateur" name="type_utilisateur" formControlName="type_utilisateur">
+              <option value="manager" *ngIf="utilisateur?.type_utilisateur === 'admin'">Manager</option>
+              <option value="chauffeur">Chauffeur</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="telephone">Téléphone</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="telephone" name="telephone" type="text" formControlName="telephone">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="adress">Adresse</label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adress" name="adress" formControlName="adress"></textarea>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="date_embauche">Date d'embauche</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_embauche" name="date_embauche" type="date" formControlName="date_embauche">
+          </div>
+          <!-- Nouveau champ pour l'image -->
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Image</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" name="image" type="file" (change)="onFileChange($event)">
+          </div>
+          <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">{{ editingUser ? 'Mettre à jour' : 'Ajouter' }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tableau des managers et chauffeurs -->
+    <div *ngIf="utilisateur?.type_utilisateur === 'admin'" class="w-full lg:w-2/3 px-3">
+      <div class="bg-white bg-opacity-30 p-6 rounded-lg shadow-md overflow-x-auto">
+        <h2 class="text-2xl font-bold mb-4">Liste des managers et chauffeurs</h2>
+        <table class="min-w-full leading-normal">
+          <thead>
+            <tr>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Avatar</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">N°</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Nom d'utilisateur</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Type d'utilisateur</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Téléphone</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Adresse</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mangChauf of managerChauffeur | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">
+                <div class="flex items-center">
+                  <button *ngIf="mangChauf.image" type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <span class="absolute -inset-1.5"></span>
+                    <img class="h-8 w-8 rounded-full" [src]="mangChauf.image" alt="">
+                  </button>
+                  <button *ngIf="!mangChauf.image" type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <span class="absolute -inset-1.5"></span>
+                    <img class="h-8 w-8 rounded-full" src="assets/images/user1.png" alt="">
+                  </button>
+                </div>
+              </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ (p - 1) * itemsPerPage + i + 1 }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ mangChauf.username }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ mangChauf.type_utilisateur }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ mangChauf.telephone }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ mangChauf.adress }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">
+                <button class="text-blue-600 hover:text-blue-900" (click)="editUser(mangChauf)">Modifier</button>
+                <button class="text-red-600 hover:text-red-900 ml-4" (click)="deleteUser(mangChauf)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+
+    <!-- Tableau des managers et chauffeurs -->
+    <div *ngIf="utilisateur?.type_utilisateur === 'manager'" class="w-full lg:w-2/3 px-3">
+      <div class="bg-white bg-opacity-75 p-6 rounded-lg shadow-md overflow-x-auto">
+        <h2 class="text-2xl font-bold mb-4">Liste des Chauffeurs</h2>
+        <table class="min-w-full leading-normal">
+          <thead>
+            <tr>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Avatar</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">N°</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Nom d'utilisateur</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Type d'utilisateur</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Téléphone</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Adresse</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/6">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let chauffeur of chauffeurs | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">
+                <div class="flex items-center">
+                  <button *ngIf="chauffeur.image" type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <span class="absolute -inset-1.5"></span>
+                    <img class="h-8 w-8 rounded-full" [src]="chauffeur.image" alt="">
+                  </button>
+                  <button *ngIf="!chauffeur.image" type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <span class="absolute -inset-1.5"></span>
+                    <img class="h-8 w-8 rounded-full" src="assets/images/user1.png" alt="">
+                  </button>
+                </div>
+              </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ (p - 1) * itemsPerPage + i + 1 }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ chauffeur.username }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ chauffeur.type_utilisateur }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ chauffeur.telephone }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">{{ chauffeur.adress }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/6">
+                <button class="text-blue-600 hover:text-blue-900" (click)="editUser(chauffeur)">Modifier</button>
+                <button class="text-red-600 hover:text-red-900 ml-4" (click)="deleteUser(chauffeur)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

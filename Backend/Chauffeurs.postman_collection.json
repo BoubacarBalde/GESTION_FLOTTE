@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "693bf47c-8cd5-45fc-91a9-ad9d13382e01",
+		"name": "Chauffeurs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35059631"
+	},
+	"item": [
+		{
+			"name": "Lists",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMzNjg5LCJpYXQiOjE3MTgzMzMzODksImp0aSI6IjdmMDZkNmY4NGRhNjQwM2ViZjNlMzA4MDI3M2Q2MDFiIiwidXNlcl9pZCI6MX0.hUcsy4g3JXvvBIV0zNl4sKVnSqzrYe67rBRSOCq9D1M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/chauffeurs/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"chauffeurs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMwNTgzLCJpYXQiOjE3MTgzMzAyODMsImp0aSI6Ijg3ODIyNDlkMDI5MjQ4YmZhYTYyNzAwYThlMWNiNTA2IiwidXNlcl9pZCI6MX0.jKVYa_6-Fqr-mpq9aeuYg-Im117KyWU4Oam4ALyrgyQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzI5NzkzLCJpYXQiOjE3MTgzMjk0OTMsImp0aSI6ImNiYjY1ZWYzODBhZDRiMDdiM2I1NGFlYjJhOTM0YmQ0IiwidXNlcl9pZCI6MX0.bbuEeBAY484u_peOUmuUaijC9tjPzDnFFplnicQSqOw",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"utilisteur\":1,\r\n  \"contrat_type\":\"crédit\",\r\n  \"created_by\":1,\r\n  \"modified_by\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/chauffeurs/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"chauffeurs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMwNTgzLCJpYXQiOjE3MTgzMzAyODMsImp0aSI6Ijg3ODIyNDlkMDI5MjQ4YmZhYTYyNzAwYThlMWNiNTA2IiwidXNlcl9pZCI6MX0.jKVYa_6-Fqr-mpq9aeuYg-Im117KyWU4Oam4ALyrgyQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"utilisteur\":1,\r\n  \"contrat_type\":\"crédit\",\r\n  \"created_by\":1,\r\n  \"modified_by\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/chauffeurs/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"chauffeurs",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMwODY3LCJpYXQiOjE3MTgzMzA1NjcsImp0aSI6ImU1ZTMzNDk5OTg5ODQ0Yjk5N2FkZWZhMTRiMzc1YWU5IiwidXNlcl9pZCI6MX0.Wpii1Z964r6EVZmhmHsPVp0ZxmswupvtnBHtTs0TTPw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMwMTQ0LCJpYXQiOjE3MTgzMjk4NDQsImp0aSI6ImIyYWY1OTNhY2EzZDRkMzdhMGY0YmY2MTRhNDIzZThhIiwidXNlcl9pZCI6MX0.nK1UZdMqTqR2GB1eUZe8UFSU30yprThUmoF-lEqiI04",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/chauffeurs/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"chauffeurs",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Selection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMwODY3LCJpYXQiOjE3MTgzMzA1NjcsImp0aSI6ImU1ZTMzNDk5OTg5ODQ0Yjk5N2FkZWZhMTRiMzc1YWU5IiwidXNlcl9pZCI6MX0.Wpii1Z964r6EVZmhmHsPVp0ZxmswupvtnBHtTs0TTPw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/chauffeurs/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"chauffeurs",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "de65d6c2-08c5-47b4-94df-b63a06d4d2b3",
+		"name": "Motos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35059631"
+	},
+	"item": [
+		{
+			"name": "Lists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzM2NjA4LCJpYXQiOjE3MTgzMzYzMDgsImp0aSI6IjJlY2RhZGQ3ODVjNzQ0NDliZGZjYmVhMmU4YTkxMWQ2IiwidXNlcl9pZCI6MX0.xUEN45SN1iA5LqFaglgZCsoHvhF3jYqMnm7lG45k9aw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/motos/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"motos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMyNjQ0LCJpYXQiOjE3MTgzMzIzNDQsImp0aSI6IjcxZjM1N2U5Y2QyNzRmY2M5OGMxMDQzYzk1ZTVlOWYxIiwidXNlcl9pZCI6MX0.gOEmA0LQnO-0dwBg6fyd0L1GUNnhjiSBM5e_Av85tn4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numero_serie\": \"ABC100\",\r\n    \"color\": \"Blue\",\r\n    \"date_achat\": \"2023-01-01\",\r\n    \"chauffeur\": 2\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/motos/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"motos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMyOTY4LCJpYXQiOjE3MTgzMzI2NjgsImp0aSI6ImM3MWQxZTMwODY1OTRmZGU4ZTc3NGZkNGUwNmE2ZWVmIiwidXNlcl9pZCI6MX0.ocSoBGGfmoZZyDlAwqpX1jyHzurPsydNC2Yp21dSeLM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numero_serie\": \"ABC125\",\r\n    \"color\": \"Green\",\r\n    \"date_achat\": \"2023-01-01\",\r\n    \"chauffeur\": 2,\r\n    \"created_by\": 1,\r\n    \"modified_by\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/motos/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"motos",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMyOTY4LCJpYXQiOjE3MTgzMzI2NjgsImp0aSI6ImM3MWQxZTMwODY1OTRmZGU4ZTc3NGZkNGUwNmE2ZWVmIiwidXNlcl9pZCI6MX0.ocSoBGGfmoZZyDlAwqpX1jyHzurPsydNC2Yp21dSeLM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/motos/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"motos",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Selection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4MzMyOTY4LCJpYXQiOjE3MTgzMzI2NjgsImp0aSI6ImM3MWQxZTMwODY1OTRmZGU4ZTc3NGZkNGUwNmE2ZWVmIiwidXNlcl9pZCI6MX0.ocSoBGGfmoZZyDlAwqpX1jyHzurPsydNC2Yp21dSeLM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/motos/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"motos",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
