@@ -16,6 +16,7 @@ export class AddMotoComponent implements OnInit {
   motos: Moto[] = [];
   adminManager: Utilisateur[] = [];
   utilisateurChauffeur: Utilisateur[] = [];
+  userAll: Utilisateur[] = [];
   chauffeurs: Chauffeur[] = [];
   editingMoto: Moto | null = null;
 
@@ -42,6 +43,7 @@ export class AddMotoComponent implements OnInit {
     this.getAdminManage();
     this.getChauffeurUti();
     this.getMotos();
+    this.getUserAll();
   }
 
   //Recuperations des chauffeurs dans la table chauffeurs
@@ -69,6 +71,16 @@ export class AddMotoComponent implements OnInit {
     this.motoServices.getAdminManagers().subscribe({
       next:(response)=>{
         this.adminManager = response;
+      },
+      error:(error)=>console.log(error)
+    })
+  }
+
+  //Recuperations de tout les utilisateurs
+  getUserAll(){
+    this.motoServices.getUserAll().subscribe({
+      next:(response)=>{
+        this.userAll = response;
       },
       error:(error)=>console.log(error)
     })
@@ -168,15 +180,29 @@ export class AddMotoComponent implements OnInit {
     }
   }
 
-  //Recuperation de l'utilisateur Chauffeur par son id:
-  getUserChauffeurById(userId: number): Utilisateur | undefined {
-    return this.utilisateurChauffeur.find(utilisateurChauffeur => utilisateurChauffeur.id === userId) ||
-           this.adminManager.find(adminManager => adminManager.id === userId);
+  //Recuperation de l'Admin, Manager, Chauffeur par l'id
+  getUserById(userId: number): any | undefined {
+
+    const verfication1 = this.chauffeurs.find(chauff => chauff.id === userId)
+    const verfication2 = this.utilisateurChauffeur.find(utilisateurChauffeur => utilisateurChauffeur.id === userId) 
+
+    if(verfication1){
+
+      const idUser = verfication1.utilisteur
+
+      return this.utilisateurChauffeur.find(useal => useal.id === idUser)
+
+    }else if(verfication2){
+
+      return this.utilisateurChauffeur.find(utilisateurChauffeur => utilisateurChauffeur.id === userId)
+
+    }else{
+
+      return this.adminManager.find(adminManager => adminManager.id === userId);
+    }
+           
   }
   
-  // //Recuperation de l'utilisateur Chauffeur par son id:
-  // getUserChauffeur(userId: number): Chauffeur | undefined {
-  //   return this.chauffeurs.find(utilist => utilist.id === userId)
-  // } 
+ 
 
 }

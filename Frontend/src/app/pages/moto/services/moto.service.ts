@@ -21,7 +21,7 @@ export interface Moto {
 })
 export class MotoService {
 
-  private baseUrl: string = 'http://127.0.0.1:8000/';
+  // private baseUrl: string = 'http://127.0.0.1:8000';
 
   private apiUrl = 'http://127.0.0.1:8000/api/motos/';
 
@@ -34,21 +34,26 @@ export class MotoService {
     });
   }
 
-  // Méthode pour ajouter la base URL à l'image
-  private getFullImageUrl(imagePath: string): string {
-    return `${this.baseUrl}${imagePath}`;
-  }
+  // // Méthode pour ajouter la base URL à l'image
+  // private getFullImageUrl(imagePath: string): string {
+  //   return `${this.baseUrl}${imagePath}`;
+  // }
 
-  //recuperations de tout les motos
-  getAllMotos(): Observable<Moto[]> {
-    return this.http.get<Moto[]>(this.apiUrl, { headers: this.getAuthHeaders()})
-      .pipe(
-        map(motos => motos.map(moto => ({
-          ...moto,
-          image: moto.image ? this.getFullImageUrl(moto.image) : null
-      })))
-    );
-  }
+  // //recuperations de tout les motos
+  // getAllMotos(): Observable<Moto[]> {
+  //   return this.http.get<Moto[]>(this.apiUrl, { headers: this.getAuthHeaders()})
+  //     .pipe(
+  //       map(motos => motos.map(moto => ({
+  //         ...moto,
+  //         image: moto.image ? this.getFullImageUrl(moto.image) : null
+  //     })))
+  //   );
+  // }
+
+    //recuperations de tout les motos
+    getAllMotos(): Observable<Moto[]> {
+      return this.http.get<Moto[]>(this.apiUrl, { headers: this.getAuthHeaders()})
+    }
 
   //Recuperation de tout les chauffeur dans la table ahuffeur
   getChauffeur(): Observable<Chauffeur[]> {
@@ -63,6 +68,11 @@ export class MotoService {
   //recuperations des manager et Admin
   getAdminManagers(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>('http://127.0.0.1:8000/api/admin-managers/', {headers: this.getAuthHeaders()});
+  }
+
+   //recuperations de tous les utilisateurs
+   getUserAll(): Observable<Utilisateur[]> {
+    return this.http.get<Utilisateur[]>('http://127.0.0.1:8000/api/list-utilisateurs/', {headers: this.getAuthHeaders()});
   }
 
   getMoto(id: number): Observable<Moto> {

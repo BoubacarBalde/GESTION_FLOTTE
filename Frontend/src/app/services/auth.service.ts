@@ -10,6 +10,7 @@ import { Utilisateur } from '../interface/interface';
 })
 export class AuthService {
   private isLoggedInSubject: BehaviorSubject<boolean>;
+  private baseUrl: string = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('access_token');
@@ -21,6 +22,11 @@ export class AuthService {
     return new HttpHeaders({
         'Authorization': `Bearer ${token}`
     });
+  }
+
+   // Méthode pour ajouter la base URL à l'image
+   private getFullImageUrl(imagePath: string): string {
+    return `${this.baseUrl}${imagePath}`;
   }
 
   login(username: string, password: string): Observable<any> {
@@ -37,8 +43,14 @@ export class AuthService {
     );
   }
 
-  getUnsernameToken(username: string): Observable<Utilisateur>{
-    return this.http.get<Utilisateur>(`http://127.0.0.1:8000/api/connexion/${username}/`,{ headers: this.getAuthHeaders() })
+  getUnsernameToken(username: string): Observable<Utilisateur> {
+    return this.http.get<Utilisateur>(`http://127.0.0.1:8000/api/connexion/${username}/`, { headers: this.getAuthHeaders() })
+      .pipe(
+        map(user => ({
+          ...user,
+          image: user?.image ? this.getFullImageUrl(user.image) : null,
+        }))
+      );
   }
 
 

@@ -28,19 +28,6 @@ export class UserService {
     return this.http.post<FormData>('http://127.0.0.1:8000/api/create-chauffeur/', user, {headers: this.getAuthHeaders()});
   }
 
-  // addUtilisateurImage(user: FormData): Observable<FormData> {
-  //   return this.http.post<FormData>('http://127.0.0.1:8000/api/create-utilisateurs-images/', user, {headers: this.getAuthHeaders()});
-  // }
-  
-  // //Ajout des Utilisateurs
-  // addUtilisateurs(user: FormData){
-  //   return this.http.post<FormData>('http://127.0.0.1:8000/api/utilisateurs/', user, {headers: this.getAuthHeaders()})
-  // }
-
-  // //Modifications et suppression des Utilisateurs
-  // updateDeleteUtilisateurs(id: number, user: FormData){
-  //   return this.http.put<FormData>(`http://127.0.0.1:8000/api/utilisateurs/${id}/`, user, {headers: this.getAuthHeaders()})
-  // }
   
   // Méthode pour ajouter la base URL à l'image
   private getFullImageUrl(imagePath: string): string {
@@ -64,8 +51,8 @@ export class UserService {
       .pipe(
         map(users => users.map(user => ({
           ...user,
-          image: user.image ? this.getFullImageUrl(user.image) : null
-        })))
+          image: user.image ? this.getFullImageUrl(user.image) : null,
+        }))),
       );
   }
 
