@@ -16,6 +16,10 @@ import { AddUserComponent } from './pages/add-user/add-user.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddChauffeurComponent } from './pages/chauffeur/add-chauffeur/add-chauffeur.component';
 import { AddMotoComponent } from './pages/moto/add-moto/add-moto.component';
+import { AddContratComponent } from './pages/contrat/add-contrat/add-contrat.component';
+import { AddPanneComponent } from './pages/panne/add-panne/add-panne.component';
+import { AddEntretientComponent } from './pages/entretien/add-entretient/add-entretient.component';
+import { AddRecetteComponent } from './pages/recette/add-recette/add-recette.component';
 
 
 @NgModule({
@@ -28,6 +32,10 @@ import { AddMotoComponent } from './pages/moto/add-moto/add-moto.component';
     AddUserComponent,
     AddChauffeurComponent,
     AddMotoComponent,
+    AddContratComponent,
+    AddPanneComponent,
+    AddEntretientComponent,
+    AddRecetteComponent,
   
   ],
   imports: [

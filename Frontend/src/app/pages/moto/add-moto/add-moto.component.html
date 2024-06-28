@@ -19,7 +19,7 @@
         <div class="mb-4">
           <label for="chauffeur" class="block text-gray-700">Chauffeur</label>
           <select id="chauffeur" formControlName="chauffeur" name="chauffeur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500" required>
-            <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.id">{{getUserById(chauffeur.utilisteur)?.username}}</option>
+            <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.id">{{getUserById(chauffeur.id)?.username}}</option>
           </select>
         </div>
         <div class="mb-4">

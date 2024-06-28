@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div class="container mx-auto p-6 bg-fixed bg-center bg-cover" style="background-image: url('assets/images/3.png');">
+    <div class="container mx-auto p-4 flex flex-col lg:flex-row justify-between items-start space-y-6 lg:space-y-0 lg:space-x-6">
+        <!-- Tableau d'entretiens -->
+        <div class="overflow-x-auto w-full lg:w-2/2 bg-opacity-75 bg-white">
+            <table class="min-w-full bg-white rounded-lg shadow-md">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="py-2 px-4">N°</th>
+                        <th class="py-2 px-4">Moto</th>
+                        <th class="py-2 px-4">Type d'entretien</th>
+                        <th class="py-2 px-4">Date d'entretien</th>
+                        <th class="py-2 px-4">Description</th>
+                        <th class="py-2 px-4">Créé par</th>
+                        <th class="py-2 px-4">Modifié par</th>
+                        <th class="py-2 px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let entretien of entretiens | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index" class="hover:bg-gray-100">
+                        <td class="border px-4 py-2">{{ (p - 1) * itemsPerPage + i + 1 }}</td>
+                        <td class="border px-4 py-2">{{ getMotoById(entretien.moto)?.numero_serie }}</td>
+                        <td class="border px-4 py-2">{{ entretien.type_entretien }}</td>
+                        <td class="border px-4 py-2">{{ entretien.date_entretion }}</td>
+                        <td class="border px-4 py-2">{{ entretien.description }}</td>
+                        <td class="border px-4 py-2">{{ getUserById(entretien.created_by)?.username }}</td>
+                        <td class="border px-4 py-2">{{ getUserById(entretien.modified_by)?.username }}</td>
+                        <td class="border px-4 py-2">
+                            <button (click)="editEntretien(entretien)" class="bg-gray-800 hover:bg-yellow-700 text-white py-1 px-2 rounded-full shadow-md mr-2">
+                                Modifier
+                            </button>
+                            <button (click)="deleteEntretien(entretien.id)" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded-full shadow-md">
+                                Supprimer
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+
+        <!-- Formulaire d'ajout d'entretien -->
+        <form [formGroup]="addEntretienForm" (ngSubmit)="onSubmit()" class="max-w-md w-full lg:w-1/2 bg-opacity-75 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-center text-gray-800">Ajouter un Entretien</h2>
+            <div class="mb-4">
+                <label for="moto" class="block text-gray-800 font-semibold mb-2">Moto</label>
+                <select id="moto" formControlName="moto" name="moto" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500" required>
+                    <option *ngFor="let moto of motos" [value]="moto.id">{{ moto.numero_serie }}</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="type_entretien" class="block text-gray-700 font-semibold mb-2">Type d'entretien</label>
+                <input type="text" id="type_entretien" formControlName="type_entretien" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="date_entretion" class="block text-gray-700 font-semibold mb-2">Date d'entretien</label>
+                <input type="date" id="date_entretion" formControlName="date_entretion" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700 font-semibold mb-2">Description</label>
+                <textarea id="description" formControlName="description" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="created_by" class="block text-gray-700 font-semibold mb-2">Créé par</label>
+                <select id="created_by" formControlName="created_by" name="created_by" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500">
+                    <option *ngFor="let admMan of adminManegr" [value]="admMan.id">{{ admMan.username }}</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="modified_by" class="block text-gray-700 font-semibold mb-2">Modifié par</label>
+                <select id="modified_by" formControlName="modified_by" name="modified_by" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500">
+                    <option *ngFor="let admMan of adminManegr" [value]="admMan.id">{{ admMan.username }}</option>
+                </select>
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                {{ entretienEdit ? 'Modifier' : 'Ajouter' }}
+            </button>
+        </form>
+    </div>
+</div>

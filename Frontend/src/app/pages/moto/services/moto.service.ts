@@ -55,15 +55,12 @@ export class MotoService {
       return this.http.get<Moto[]>(this.apiUrl, { headers: this.getAuthHeaders()})
     }
 
-  //Recuperation de tout les chauffeur dans la table ahuffeur
-  getChauffeur(): Observable<Chauffeur[]> {
-    return this.http.get<Chauffeur[]>('http://127.0.0.1:8000/api/chauffeurs/', { headers: this.getAuthHeaders()})
-  }
-
-  //Recuperation de tout les chauffeur dans la table autilisateur
-  getChauffeurUtili(): Observable<Utilisateur[]> {
+  //Recuperation de tout les chauffeur dans la table utilisateur
+  getChauffeur(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>('http://127.0.0.1:8000/api/list-chauffeur/', { headers: this.getAuthHeaders()})
   }
+
+
 
   //recuperations des manager et Admin
   getAdminManagers(): Observable<Utilisateur[]> {

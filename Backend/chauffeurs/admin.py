@@ -1,6 +1,6 @@
 from django.contrib import admin
-from chauffeurs.models import Chauffeur
+# from chauffeurs.models import Chauffeur
 
-admin.site.register(Chauffeur)
+# admin.site.register(Chauffeur)
 
 # Register your models here.

@@ -82,25 +82,34 @@ export class AddUserComponent implements OnInit {
       } else if (this.utilisateur?.type_utilisateur === 'admin') {
         if (this.addUserForm.value.type_utilisateur === 'manager') {
           // Ajouter un nouveau Manager
-          this.userService.addManager(formData).subscribe(response => {
-            alert('Manager créé avec succès');
-            this.getManagersChauffeurs();
-            this.addUserForm.reset();
+          this.userService.addManager(formData).subscribe({
+            next:()=>{
+              alert('Manager créé avec succès');
+              this.getManagersChauffeurs();
+              this.addUserForm.reset();
+            },
+            error:()=>{alert('Le Manager existe deja')}
           });
         } else {
           // Ajouter un nouveau Chauffeur
-          this.userService.addChauffeur(formData).subscribe(response => {
-            alert('Chauffeur créé avec succès');
-            this.getChauffeurs();
-            this.addUserForm.reset();
+          this.userService.addChauffeur(formData).subscribe({
+            next:()=>{
+              alert('Chauffeur créé avec succès');
+              this.getChauffeurs();
+              this.addUserForm.reset();
+            },
+            error:()=>{alert('Le Chauffeur existe deja')}
           });
         }
       } else {
         // Ajouter un nouveau Chauffeur (non-admin)
-        this.userService.addChauffeur(formData).subscribe(response => {
-          alert('Chauffeur créé avec succès');
-          this.getChauffeurs();
-          this.addUserForm.reset();
+        this.userService.addChauffeur(formData).subscribe({
+          next:()=>{
+            alert('Chauffeur créé avec succès');
+            this.getChauffeurs();
+            this.addUserForm.reset();
+          },
+          error:()=>{alert('Le Chauffeur existe deja')}
         });
       }
     }
