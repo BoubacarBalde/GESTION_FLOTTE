@@ -6,21 +6,15 @@
       <form [formGroup]="addMotoForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <div class="mb-4">
           <label for="numero_serie" class="block text-gray-700">Numéro de série</label>
-          <input type="text" id="numero_serie" formControlName="numero_serie" class="w-full p-2 border border-gray-300 rounded mt-1" />
+          <input type="text" id="numero_serie" formControlName="numero_serie" class="w-full p-2 border border-gray-300 rounded mt-1" required />
         </div>
         <div class="mb-4">
           <label for="color" class="block text-gray-700">Couleur</label>
-          <input type="text" id="color" formControlName="color" class="w-full p-2 border border-gray-300 rounded mt-1" />
+          <input type="text" id="color" formControlName="color" class="w-full p-2 border border-gray-300 rounded mt-1" required />
         </div>
         <div class="mb-4">
           <label for="date_achat" class="block text-gray-700">Date d'achat</label>
-          <input type="date" id="date_achat" formControlName="date_achat" class="w-full p-2 border border-gray-300 rounded mt-1" />
-        </div>
-        <div class="mb-4">
-          <label for="chauffeur" class="block text-gray-700">Chauffeur</label>
-          <select id="chauffeur" formControlName="chauffeur" name="chauffeur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500" required>
-            <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.id">{{getUserById(chauffeur.id)?.username}}</option>
-          </select>
+          <input type="date" id="date_achat" formControlName="date_achat" class="w-full p-2 border border-gray-300 rounded mt-1" required />
         </div>
         <div class="mb-4">
           <label for="image" class="block text-gray-700">Image</label>
@@ -28,13 +22,13 @@
         </div>
         <div class="mb-4">
           <label for="created_by" class="block text-gray-700">Créé par</label>
-          <select id="created_by" formControlName="created_by" name="created_by" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500" required>
+          <select id="created_by" formControlName="created_by" name="created_by" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500">
             <option *ngFor="let adminManag of adminManager" [value]="adminManag.id">{{ adminManag.username}}</option>
           </select>
         </div>
         <div class="mb-4">
           <label for="modified_by" class="block text-gray-700">Modifié par</label>
-          <select id="modified_by" formControlName="modified_by" name="modified_by" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500" required>
+          <select id="modified_by" formControlName="modified_by" name="modified_by" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500">
             <option *ngFor="let adminManag of adminManager" [value]="adminManag.id">{{ adminManag.username}}</option>
           </select>
         </div>
@@ -54,9 +48,8 @@
           <h2 class="text-xl font-bold">{{ moto.numero_serie }}</h2>
           <p>Couleur: {{ moto.color }}</p>
           <p>Date d'achat: {{ moto.date_achat }}</p>
-          <p>Chauffeur: {{ getUserById(moto.chauffeur)?.username }}</p>
-          <p>Créé par: {{ getUserById(moto.created_by)?.username }}</p>
-          <p>Modifié par: {{ getUserById(moto.modified_by)?.username }}</p>
+          <p>Créé par: {{ getUserById(moto.created_by!)?.username }}</p>
+          <p>Modifié par: {{ getUserById(moto.modified_by!)?.username }}</p>
         </div>
         <div class="flex space-x-2">
           <button (click)="editMoto(moto)" class="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-700">Modifier</button>

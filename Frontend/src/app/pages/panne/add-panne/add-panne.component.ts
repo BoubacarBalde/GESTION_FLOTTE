@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Moto } from '../../moto/services/moto.service';
 import { UserService } from 'src/app/services/user.service';
 import { Utilisateur } from 'src/app/interface/interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { Contrat, ContratService } from '../../contrat/services/contrat.service';
 
 @Component({
   selector: 'app-add-panne',
@@ -16,13 +18,21 @@ export class AddPanneComponent {
   adminManegr: Utilisateur[] = [];
   motos: Moto[] = [];
   pannes: Panne[] = [];
+  
+  username: string | undefined;
+  utilisateur: Utilisateur | undefined;
+  // contratChauffeur: Contrat | undefined;
 
 
   p: number = 1; // Page actuelle
   itemsPerPage: number = 4; // Nombre d'éléments par page
   
 
-  constructor(private panneService: PanneService, private fb: FormBuilder, private userService: UserService) {
+  constructor(private authService: AuthService, 
+              private panneService: PanneService, 
+              private fb: FormBuilder,
+              private contratService: ContratService
+            ) {
     this.addPanneForm = this.fb.group({
       moto:['', Validators.required],
       description:['', Validators.required],
@@ -37,7 +47,28 @@ export class AddPanneComponent {
     this.getAdminMange();
     this.getMoto();
     this.getAllPanne();
-   
+    this.getTypeUtilisateur();
+
+  }
+
+  //Recuperation de l'utilisateur connecter
+  getTypeUtilisateur(){
+    this.username = this.authService.getUsername()
+    this.authService.getUnsernameToken(this.username!).subscribe({
+      next:(response)=>{
+        this.utilisateur = response;
+        console.log(this.utilisateur);
+        //  //Recuperation du contrat de l'utilisateur
+        // this.contratService.getContratChaufeur(this.utilisateur.id).subscribe({
+        //   next:(response)=>{
+        //     this.contratChauffeur = response;
+        //     console.log(this.contratChauffeur);
+        //   },
+        //   error: ()=> console.log('Erreur de recuperation du contrat')
+        // })
+      },
+      error: ()=> console.log('Erreur de recuperation de l\'utilisateur')
+    })
   }
   
 

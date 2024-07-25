@@ -1,0 +1,63 @@
+<div class="min-h-screen bg-cover bg-center" style="background-image: url('assets/images/3.png'); background-attachment: fixed;">
+  <div class="min-h-screen flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white bg-opacity-70 shadow-md rounded-lg w-full md:w-2/3 lg:w-1/2">
+      <div class="p-4">
+        <div class="flex flex-wrap">
+          <div class="w-full">
+            <span class="text-2xl font-bold">Profile Information</span>
+            <hr class="my-2">
+            <div class="flex items-start space-x-4">
+              <form [formGroup]="addUtilisateurForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="space-y-4 flex-1">
+                <!-- Username Field -->
+                <div>
+                  <label for="username" class="block text-gray-700">Username</label>
+                  <input type="text" id="username" name="username" formControlName="username" [value]="utilisateur?.username" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                  <label for="email" class="block text-gray-700">Email</label>
+                  <input type="email" id="email" name="email" formControlName="email" [value]="utilisateur?.email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                  <label for="password" class="block text-gray-700">Password</label>
+                  <input type="password" id="password" name="password" formControlName="password" [value]="utilisateur?.password"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Telephone Field -->
+                <div>
+                  <label for="telephone" class="block text-gray-700">Telephone</label>
+                  <input type="text" id="telephone" name="telephone" formControlName="telephone" [value]="utilisateur?.telephone"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Address Field -->
+                <div>
+                  <label for="adress" class="block text-gray-700">Address</label>
+                  <input type="text" id="adress" name="adress" formControlName="adress" [value]="utilisateur?.adress"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Image Upload Field -->
+                <div>
+                  <label for="image" class="block text-gray-700">Image</label>
+                  <input type="file" id="image" name="image" formControlName="image"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" (change)="onFileChange($event)">
+                </div>
+
+                <input class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" type="submit" value="Update">
+              </form>
+              <!-- Image Field -->
+              <div>
+                <img [src]="utilisateur?.image" alt="Profile Image" class="w-32 h-32 object-cover rounded-md">
+              </div>
+            </div>
+            <!-- Back Link -->
+            <div class="mt-4 text-center">
+              <a href="nav-bar" class="text-blue-500 hover:underline">Retour</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

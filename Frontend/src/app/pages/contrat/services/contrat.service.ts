@@ -13,10 +13,10 @@ export interface Contrat {
   montant_initial: number | null;  // Peut être null ou undefined
   montant_journalier: number;
   date_debut: string;  // Date en format ISO
-  date_fin: string | null;  // Peut être null ou undefined
+  date_fin: string | null; // Peut être null ou undefined
   etat: 'en_cours' | 'termine' | 'annule';
-  created_by: number;  // Peut être null ou undefined
-  modified_by: number;  // Peut être null ou undefined
+  created_by: number | null;  // Peut être null ou undefined
+  modified_by: number | null;  // Peut être null ou undefined
 }
 
 
@@ -50,6 +50,11 @@ export class ContratService {
   //recuperations des manager et Admin
   getAdminManagers(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>('http://127.0.0.1:8000/api/admin-managers/', {headers: this.getAuthHeaders()});
+  }
+
+   //recuperations du contrat d'un chauffeur existant
+   getContratChaufeur(chauffeur: number): Observable<Contrat> {
+    return this.http.get<Contrat>(`http://127.0.0.1:8000/api/contrats/chauffeur/${chauffeur}/`, {headers: this.getAuthHeaders()});
   }
 
   //Recuperation de tout les contrats

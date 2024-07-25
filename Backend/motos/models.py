@@ -9,7 +9,7 @@ class Moto(models.Model):
     numero_serie = models.CharField(max_length=50,unique=True)
     color = models.CharField(max_length=50)
     date_achat = models.DateField()
-    chauffeur = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, null=True, blank=True)
+    # chauffeur = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to='moto_images/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='moto_created_by', on_delete=models.SET_NULL, null=True)

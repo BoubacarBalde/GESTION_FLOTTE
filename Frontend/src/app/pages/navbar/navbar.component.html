@@ -17,12 +17,13 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" routerLink="/dashboard" routerLinkActive="bg-gray-900 text-white" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
-            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" routerLink="/add-user" routerLinkActive="bg-gray-900 text-white" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add User</a>
+            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" routerLink="/add-user" routerLinkActive="bg-gray-900 text-white" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">User</a>
             <!-- <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" routerLink="/add-chauffeur" routerLinkActive="bg-gray-900 text-white" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"> Add Chauffeur</a> -->
-            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-moto" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Moto</a>
-            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-contrat" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Contrat</a>
-            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-panne" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Panne</a>
-            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-entretien" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Entretien</a>
+            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-moto" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Moto</a>
+            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-contrat" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contrat</a>
+            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager' || utilisateur?.type_utilisateur === 'chauffeur'"  routerLink="/add-panne" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Panne</a>
+            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager' || utilisateur?.type_utilisateur === 'chauffeur'"  routerLink="/add-entretien" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Entretien</a>
+            <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager' || contratChauffeur?.type_contrat === 'crédit'"  routerLink="/add-recette" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Recette</a>
           </div>
         </div>
       </div>
@@ -37,8 +38,8 @@
           </div>
           
           <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-            <!-- <a class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-            <a class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a> -->
+            <a class="block px-4 py-2 text-sm text-gray-700" routerLink="/add-profile" role="menuitem" tabindex="-1" id="user-menu-item-0">Profile</a> 
+            <!-- <a class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a> -->
             <a *ngIf="isLoggedIn" (click)="logout()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Logout</a>
             <a *ngIf="!isLoggedIn" (click)="logout()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Se Connecter</a>
           </div>
@@ -50,12 +51,13 @@
   <div class="sm:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" routerLink="/dashboard" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
-      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" routerLink="/add-user" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add User</a>
+      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" routerLink="/add-user" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">User</a>
       <!-- <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-chauffeur" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"> Add Chauffeur</a> -->
-      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-moto" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Moto</a>
-      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-contrat" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Contrat</a>
-      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-panne" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Panne</a>
-      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-entretien" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Entretien</a>
+      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-moto" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Moto</a>
+      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'"  routerLink="/add-contrat" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contrat</a>
+      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager' || utilisateur?.type_utilisateur === 'chauffeur'"  routerLink="/add-panne" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Panne</a>
+      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager' || utilisateur?.type_utilisateur === 'chauffeur'"  routerLink="/add-entretien" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Entretien</a>
+      <a *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager' || contratChauffeur?.type_contrat === 'crédit'"  routerLink="/add-recette" routerLinkActive="bg-gray-900 text-white" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Recette</a>
     </div>
   </div>
 </nav>

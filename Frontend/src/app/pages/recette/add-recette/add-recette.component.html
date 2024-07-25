@@ -1,1 +1,78 @@
-<p>add-recette works!</p>
+<app-navbar></app-navbar>
+<div class="container mx-auto p-6 bg-fixed bg-center bg-cover" style="background-image: url('assets/images/3.png');">
+  <div class="flex flex-wrap -mx-3">
+    <!-- Formulaire -->
+    <div class="w-full lg:w-1/3 px-3 mb-6 lg:mb-0">
+      <div class="bg-white bg-opacity-30 p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">{{ recetteEdit ? 'Modifier' : 'Ajouter' }} une recette</h2>
+        <form [formGroup]="addRecetteForm" (ngSubmit)="onSubmit()">
+          <!-- Autres champs du formulaire -->
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="chauffeur">Chauffeur</label>
+            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="chauffeur" name="chauffeur" formControlName="chauffeur">
+              <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.id">{{ chauffeur.username}}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="date">Date</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date" name="date" type="date" formControlName="date">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="montant">Montant</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="montant" name="montant" type="number" formControlName="montant">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="created_by">Créé par</label>
+            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="created_by" name="created_by" formControlName="created_by">
+              <option *ngFor="let admMang of adminManegr" [value]="admMang.id">{{ admMang.username }} </option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="modified_by">Modifié par</label>
+            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="modified_by" name="modified_by" formControlName="modified_by">
+              <option *ngFor="let admMang of adminManegr" [value]="admMang.id">{{ admMang.username }}</option>
+            </select>
+          </div>
+          <div *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">{{ recetteEdit ? 'Mettre à jour' : 'Ajouter' }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tableau des recettes -->
+    <div class="w-full lg:w-2/3 px-3">
+      <div class="bg-white bg-opacity-30 p-6 rounded-lg shadow-md overflow-x-auto">
+        <h2 class="text-2xl font-bold mb-4">Liste des recettes</h2>
+        <table class="min-w-full leading-normal">
+          <thead>
+            <tr>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/12">N°</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/12">Chauffeur</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/12">Date</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/12">Montant</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/12">Créé par</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/12">Modifié par</th>
+              <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-1/12">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let recette of recettes | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/12">{{ (p - 1) * itemsPerPage + i + 1 }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/12">{{ getUserById(recette.chauffeur)?.username }} </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/12">{{ recette.date | date:'dd/MM/yyyy' }}</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/12">{{ recette.montant }} FG</td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/12">{{ getUserById(recette.created_by)?.username }} </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/12">{{ getUserById(recette.created_by)?.username }} </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/12">
+                <button *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" class="text-blue-600 hover:text-blue-900" (click)="editRecette(recette)">Modifier</button>
+                <button *ngIf="utilisateur?.type_utilisateur === 'admin' || utilisateur?.type_utilisateur === 'manager'" class="text-red-600 hover:text-red-900 ml-4" (click)="deleteRecette(recette.id)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

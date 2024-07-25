@@ -20,7 +20,7 @@ import { AddContratComponent } from './pages/contrat/add-contrat/add-contrat.com
 import { AddPanneComponent } from './pages/panne/add-panne/add-panne.component';
 import { AddEntretientComponent } from './pages/entretien/add-entretient/add-entretient.component';
 import { AddRecetteComponent } from './pages/recette/add-recette/add-recette.component';
-
+import { AddProfileComponent } from './pages/profile/add-profile/add-profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { AddRecetteComponent } from './pages/recette/add-recette/add-recette.com
     AddPanneComponent,
     AddEntretientComponent,
     AddRecetteComponent,
-  
+    AddProfileComponent,
   ],
   imports: [
     BrowserModule,

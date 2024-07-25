@@ -19,24 +19,29 @@ export class AddContratComponent {
   adminManegr: Utilisateur[] = [];
   motos: Moto[] = [];
   contrats: Contrat[] = [];
+  chaufExit: Contrat[] = [];
+  chauff: Contrat | undefined;
   isEdit = false;
 
   p: number = 1; // Page actuelle
   itemsPerPage: number = 4; // Nombre d'éléments par page
   
 
-  constructor(private contratService: ContratService, private fb: FormBuilder, private userService: UserService) {
+  constructor(
+             private contratService: ContratService, 
+             private fb: FormBuilder, 
+            ) {
     this.addContratForm = this.fb.group({
       chauffeur: ['', Validators.required],
       moto: ['', Validators.required],
       type_contrat: ['', Validators.required],
-      montant_initial: [''],
+      montant_initial: [null],
       montant_journalier: ['', Validators.required],
       date_debut: ['', Validators.required],
-      date_fin: [''],
+      date_fin: [null],
       etat: ['', Validators.required],
-      created_by: ['',Validators.required],
-      modified_by: ['',Validators.required]
+      created_by: [null],
+      modified_by: [null]
     });
    }
 
@@ -45,7 +50,7 @@ export class AddContratComponent {
     this.getAdminMange();
     this.getAllContrat();
     this.getMoto();
-   
+    // this.getContratChauffeursEx();
   }
   
   //Recuperations des chauffeurs dans la table Utilisateurs
@@ -55,9 +60,8 @@ export class AddContratComponent {
     });
   }
 
-
   //Recuperation de l'admin et manager
-  getAdminMange(): void {
+  getAdminMange(){
     this.contratService.getAdminManagers().subscribe(data=>{
       this.adminManegr = data;
     })
@@ -74,31 +78,66 @@ export class AddContratComponent {
    getAllContrat(): void {
     this.contratService.getAllContrat().subscribe(data=>{
       this.contrats = data;
+      this.chaufExit = data;
+      console.log(this.chaufExit);
+      
     })
   }
 
+  // //Recuperation du contrat d'un chauffeur existant
+  // getContratChauffeursEx(): void{
+  //   this.contratService.getContratChaufeurExit().subscribe(data=>{
+  //   this.chaufExit = data
+  //     console.log(this.chaufExit);
+  //   })
+  // }
+
   onSubmit(): void {
+    // this.getContratChauffeursEx();
     if(this.addContratForm.valid){
       if (this.contratEdit) {
-        this.contratService.updateContrat(this.contratEdit!.id, this.addContratForm.value).subscribe({
-          next:()=>{
-            alert('Contrat modifier avec succès');
-            this.gethauffeurs();
-            this.getAdminMange();
-            this.getAllContrat();
-            this.addContratForm.reset();
-          },
-          error:()=>{alert('Ce contrat existe deja')}      
-        });
-      } else {
-        this.contratService.addContrat(this.addContratForm.value).subscribe(response=>{
-            alert('Contrat effectue avec succès');
-            this.gethauffeurs();
-            this.getAdminMange();
-            this.getAllContrat();
-            this.addContratForm.reset();
-        });
+        if(this.contratEdit.etat === 'termine' || this.contratEdit.etat === 'annule'){
+            alert('Ce contrat ne peut plus etre mit en cours')
+        }else{
+          this.contratService.updateContrat(this.contratEdit!.id, this.addContratForm.value).subscribe({
+            next:()=>{
+              alert('Contrat modifier avec succès');
+              this.gethauffeurs();
+              this.getAdminMange();
+              this.getAllContrat();
+              this.addContratForm.reset();
+            },
+            error:(error)=>{
+              console.error('Erreur lors de l\'ajout du contrat', error);
+              alert(error.value);
+            }      
+          });
+        }
+      } else { 
+        if(this.chaufExit.find(resp=>resp.chauffeur == this.addContratForm.value.chauffeur)){
+          alert('Un contrat a été déja lié à ce Chauffeur!');
+        }else if(this.addContratForm.value.type_contrat === 'crédit' && this.addContratForm.value.montant_initial === null){
+           alert('Veuillez saisir le montant initial');
+        }else if(this.addContratForm.value.type_contrat === 'embauche' && this.addContratForm.value.montant_initial != null){
+            alert('Le montant initial doit etre vide');
+        }else{
+          this.contratService.addContrat(this.addContratForm.value).subscribe({
+            next:()=>{
+              alert('Contrat effectue avec succès');
+              this.gethauffeurs();
+              this.getAdminMange();
+              this.getAllContrat();
+              this.addContratForm.reset();
+            },
+            error:(error)=>{
+              console.error('Erreur lors de l\'ajout du contrat', error);
+              alert(error.value);
+            }
+          });
+        }
       }
+    }else{
+      alert('Veuillez remplire tout les champs obligatoire')
     }
   }
 

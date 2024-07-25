@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AddMotoComponent implements OnInit {
   addMotoForm: FormGroup;
   motos: Moto[] = [];
+  motoExist: Moto[] = [];
   adminManager: Utilisateur[] = [];
   chauffeurs: Utilisateur[] = [];
   editingMoto: Moto | null = null;
@@ -28,10 +29,10 @@ export class AddMotoComponent implements OnInit {
       numero_serie: ['', Validators.required],
       color: ['', Validators.required],
       date_achat: ['', Validators.required],
-      chauffeur: ['', Validators.required],
-      image: [''],
-      created_by: ['', Validators.required],
-      modified_by: ['', Validators.required],
+      // chauffeur: ['', Validators.required],
+      image: [null],
+      created_by: [null],
+      modified_by: [null],
     });
   }
 
@@ -68,6 +69,10 @@ export class AddMotoComponent implements OnInit {
     this.motoServices.getAllMotos().subscribe({
       next:(response)=>{
         this.motos = response;
+        this.motoExist = response;
+
+        console.log(this.motoExist);
+        
       },
       error:(error)=>console.log(error)
     })
@@ -91,28 +96,16 @@ export class AddMotoComponent implements OnInit {
       formData.append('numero_serie', this.addMotoForm.get('numero_serie')!.value);
       formData.append('color', this.addMotoForm.get('color')!.value);
       formData.append('date_achat', this.addMotoForm.get('date_achat')!.value);
-      formData.append('chauffeur', this.addMotoForm.get('chauffeur')!.value);
-      formData.append('image', this.addMotoForm.get('image')!.value);
-      formData.append('created_by', this.addMotoForm.get('created_by')!.value);
-      formData.append('modified_by', this.addMotoForm.get('modified_by')!.value); // Assurez-vous que 'image' est correctement configuré dans votre template HTML
+      // formData.append('chauffeur', this.addMotoForm.get('chauffeur')!.value);
+      formData.append('image', this.addMotoForm.get('image')?.value);
+      formData.append('created_by', this.addMotoForm.get('created_by')?.value);
+      formData.append('modified_by', this.addMotoForm.get('modified_by')?.value); // Assurez-vous que 'image' est correctement configuré dans votre template HTML
 
       if (this.editingMoto) {
         // Mettre à jour la moto existante
         this.motoServices.updateMoto(this.editingMoto.id, formData).subscribe({
           next:()=>{
             alert('Moto mis à jour avec succès');
-          this.getChauffeur();
-          this.getAdminManage();
-          this.getMotos();   
-          this.editingMoto = null;
-          this.addMotoForm.reset();
-          },
-        });
-      } else {
-        // Ajouter une nouvelle moto
-        this.motoServices.addMoto(formData).subscribe({
-          next:()=>{
-            alert('Moto créé avec succès');
             this.getChauffeur();
             this.getAdminManage();
             this.getMotos();   
@@ -120,6 +113,22 @@ export class AddMotoComponent implements OnInit {
             this.addMotoForm.reset();
           },
         });
+      } else {
+        // Ajouter une nouvelle moto
+        if(this.motoExist.find(exist => exist.numero_serie == this.addMotoForm.value.numero_serie)){
+          alert('Le numero de serie existe deja!')
+        }else{
+          this.motoServices.addMoto(formData).subscribe({
+            next:()=>{
+              alert('Moto créé avec succès');
+              this.getChauffeur();
+              this.getAdminManage();
+              this.getMotos();   
+              this.editingMoto = null;
+              this.addMotoForm.reset();
+            },
+          });
+        }
       }
     }
   }

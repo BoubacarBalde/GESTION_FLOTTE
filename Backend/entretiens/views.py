@@ -8,7 +8,7 @@ from utilisateurs.permissions import IsAdminOrIsManager
 class EntretienViewSet(viewsets.ModelViewSet):
     queryset = Entretien.objects.all()
     serializer_class = EntretienSerializer
-    permission_classes = [IsAuthenticated, IsAdminOrIsManager]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user, modified_by=self.request.user)

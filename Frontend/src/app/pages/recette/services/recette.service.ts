@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Utilisateur } from 'src/app/interface/interface';
 
+
 export interface Recette {
   id: number;
   chauffeur: number; // ID du chauffeur
   date: string; // Date en format ISO
   montant: number; // Montant en décimal
-  created_by: number | null; // ID de l'utilisateur créateur ou null
+  created_by: number // ID de l'utilisateur créateur ou null
   modified_by: number | null; // ID de l'utilisateur modificateur ou null
 }
 
@@ -34,12 +35,17 @@ export class RectteService {
     return this.http.get<Recette[]>(`${this.apiUrl}`,{ headers: this.getAuthHeaders() });
   }
 
+  //Recuperation de tout les chauffeur dans la table utilisateur
+  getChauffeurs(): Observable<Utilisateur[]> {
+    return this.http.get<Utilisateur[]>('http://127.0.0.1:8000/api/list-chauffeur/', { headers: this.getAuthHeaders()})
+  }
+
   //recuperations des manager et Admin
   getAdminManagers(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>('http://127.0.0.1:8000/api/admin-managers/', {headers: this.getAuthHeaders()});
   }
 
-  //Recuperation d'une
+  //Recuperation d'une Recette
   getRecette(id: number): Observable<Recette> {
     return this.http.get<Recette>(`${this.apiUrl}${id}/`,{ headers: this.getAuthHeaders() });
   }
@@ -56,3 +62,4 @@ export class RectteService {
     return this.http.delete<Recette>(`${this.apiUrl}${id}/`,{ headers: this.getAuthHeaders() });
   }
 }
+

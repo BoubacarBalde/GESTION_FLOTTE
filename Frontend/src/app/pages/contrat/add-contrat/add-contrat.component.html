@@ -31,8 +31,8 @@
                         <td class="border px-4 py-2">{{ contrat.date_debut }}</td>
                         <td class="border px-4 py-2">{{ contrat.date_fin }}</td>
                         <td class="border px-4 py-2">{{ contrat.etat }}</td>
-                        <td class="border px-4 py-2">{{ getUserById(contrat.created_by)?.username }}</td>
-                        <td class="border px-4 py-2">{{ getUserById(contrat.modified_by)?.username }}</td>
+                        <td class="border px-4 py-2">{{ getUserById(contrat.created_by!)?.username }}</td>
+                        <td class="border px-4 py-2">{{ getUserById(contrat.modified_by!)?.username }}</td>
                         <td class="border px-4 py-2">
                             <button (click)="editContrat(contrat)" class="bg-gray-800 hover:bg-yellow-700 text-white py-1 px-2 rounded-full shadow-md mr-2">
                                 Modifier

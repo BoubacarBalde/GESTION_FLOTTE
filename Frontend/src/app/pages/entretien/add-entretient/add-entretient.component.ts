@@ -5,6 +5,8 @@ import { Entretien, EntretienService } from '../services/entretien.service';
 import { Moto } from '../../moto/services/moto.service';
 import { Utilisateur } from 'src/app/interface/interface';
 import { UserService } from 'src/app/services/user.service';
+import { Contrat } from '../../contrat/services/contrat.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-add-entretient',
@@ -18,12 +20,17 @@ export class AddEntretientComponent {
   entretiens: Entretien[] = [];
   entretienEdit: Entretien | undefined; 
 
+  username: string | undefined;
+  utilisateur: Utilisateur | undefined;
+  // contratChauffeur: Contrat | undefined;
+
+
 
   p: number = 1; // Page actuelle
   itemsPerPage: number = 4; // Nombre d'éléments par page
   
 
-  constructor(private entretienService: EntretienService, private fb: FormBuilder, private userService: UserService) {
+  constructor(private authService: AuthService, private entretienService: EntretienService, private fb: FormBuilder, private userService: UserService) {
     this.addEntretienForm = this.fb.group({
       moto: ['',Validators.required], // ID de la moto
       type_entretien:['',Validators.required],
@@ -38,6 +45,7 @@ export class AddEntretientComponent {
     this.getAdminMange();
     this.getMoto();
     this.getAllPEntretien();
+    this.getTypeUtilisateur();
    
   }
   
@@ -60,6 +68,26 @@ export class AddEntretientComponent {
    getAllPEntretien(): void {
     this.entretienService.getAllEntretion().subscribe(data=>{
       this.entretiens = data;
+    })
+  }
+
+  //Recuperation de l'utilisateur connecter
+  getTypeUtilisateur(){
+    this.username = this.authService.getUsername()
+    this.authService.getUnsernameToken(this.username!).subscribe({
+      next:(response)=>{
+        this.utilisateur = response;
+        console.log(this.utilisateur);
+        //  //Recuperation du contrat de l'utilisateur
+        // this.contratService.getContratChaufeur(this.utilisateur.id).subscribe({
+        //   next:(response)=>{
+        //     this.contratChauffeur = response;
+        //     console.log(this.contratChauffeur);
+        //   },
+        //   error: ()=> console.log('Erreur de recuperation du contrat')
+        // })
+      },
+      error: ()=> console.log('Erreur de recuperation de l\'utilisateur')
     })
   }
 

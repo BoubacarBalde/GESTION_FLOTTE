@@ -10,6 +10,8 @@ import { AddMotoComponent } from './pages/moto/add-moto/add-moto.component';
 import { AddContratComponent } from './pages/contrat/add-contrat/add-contrat.component';
 import { AddPanneComponent } from './pages/panne/add-panne/add-panne.component';
 import { AddEntretientComponent } from './pages/entretien/add-entretient/add-entretient.component';
+import { AddRecetteComponent } from './pages/recette/add-recette/add-recette.component';
+import { AddProfileComponent } from './pages/profile/add-profile/add-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'add-contrat', component: AddContratComponent},
   { path: 'add-panne', component: AddPanneComponent},
   { path: 'add-entretien', component: AddEntretientComponent},
+  { path: 'add-recette', component: AddRecetteComponent},
+  { path: 'add-profile', component: AddProfileComponent},
   // { path: 'add-chauffeur', component: AddChauffeurComponent},
   { path:'', redirectTo:'login', pathMatch:'full'},
   { path:'**', component: LoginComponent}

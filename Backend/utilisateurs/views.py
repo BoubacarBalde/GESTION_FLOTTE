@@ -36,7 +36,7 @@ class CreateManagerView(generics.CreateAPIView):
         
 #Recuperation des donnees de l'utilisateur connecter
 @api_view(['GET'])
-@permission_classes([IsAuthenticated, IsAdminOrIsManager])
+@permission_classes([IsAuthenticated])
 def UtilisateurConnexion(request, username):
     try:
         utilisateur = Utilisateur.objects.get(username=username)
@@ -49,7 +49,7 @@ def UtilisateurConnexion(request, username):
    
 #Renvoie de tout les chauffeur
 @api_view(['GET'])
-@permission_classes([IsAuthenticated, IsAdminOrIsManager])
+@permission_classes([IsAuthenticated])
 def renvoiChaufeur(request):
     if request.method == 'GET':
         chauffeurs = Utilisateur.objects.filter(type_utilisateur='chauffeur')  # Assurez-vous que le filtre est correct
@@ -58,7 +58,7 @@ def renvoiChaufeur(request):
  
 #Renvoie de tout les Managers et Chauffeurs
 @api_view(['GET'])
-@permission_classes([IsAuthenticated, IsAdminOrIsManager])
+@permission_classes([IsAuthenticated])
 def renvoiManagersEtChauffeurs(request):
     if request.method == 'GET':
         utilisateurs = Utilisateur.objects.filter(type_utilisateur__in=['manager', 'chauffeur'])
@@ -67,7 +67,7 @@ def renvoiManagersEtChauffeurs(request):
     
 #Renvoie de tout les Managers et Admin
 @api_view(['GET'])
-@permission_classes([IsAuthenticated, IsAdminOrIsManager])
+@permission_classes([IsAuthenticated])
 def renvoiAdminManager(request):
     if request.method == 'GET':
         utilisateurs = Utilisateur.objects.filter(type_utilisateur__in=['admin', 'manager'])

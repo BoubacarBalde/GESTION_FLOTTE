@@ -72,5 +72,13 @@ export class AuthService {
       return localStorage.removeItem('username')!;
     }
   }
+
+  getIdContratChauf(): string{
+    if(this.isLoggedInSubject){
+      return localStorage.getItem('username')!;
+    }else{
+      return localStorage.removeItem('username')!;
+    }
+  }
   
 }

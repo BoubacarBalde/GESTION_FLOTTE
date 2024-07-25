@@ -9,10 +9,10 @@ export interface Moto {
   numero_serie: string;
   color: string;
   date_achat: string;
-  chauffeur: number;
+  // chauffeur: number;
   image: string | null;
-  created_by: number;
-  modified_by: number;
+  created_by: number | null;
+  modified_by: number | null;
 
 }
 
