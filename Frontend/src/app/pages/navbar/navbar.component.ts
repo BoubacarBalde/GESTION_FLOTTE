@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
           error: ()=> console.log('Erreur de recuperation du contrat')
         })
       },
-      error: ()=> console.log('Erreur de recuperation')
+      error: ()=> console.log('Erreur de recupération')
       
     })
   }
